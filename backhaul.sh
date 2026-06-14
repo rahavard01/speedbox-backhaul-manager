@@ -2,14 +2,12 @@
 
 set -e
 
+SCRIPT_URL="https://raw.githubusercontent.com/rahavard01/speedbox-backhaul-manager/main/backhaul.py"
+
 apt update -y
-apt install -y python3 python3-pip curl wget unzip tar netcat-openbsd
+apt install -y python3 python3-pip wget curl unzip tar netcat-openbsd
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+rm -f backhaul.py
+wget -O backhaul.py "$SCRIPT_URL"
 
-if [ ! -f "$SCRIPT_DIR/backhaul.py" ]; then
-    echo "Error: backhaul.py not found in $SCRIPT_DIR"
-    exit 1
-fi
-
-python3 "$SCRIPT_DIR/backhaul.py"
+python3 backhaul.py
